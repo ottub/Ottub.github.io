@@ -4,18 +4,17 @@
 .project-nav{position:relative;border-bottom:1px solid var(--line);overflow-x:auto;overflow-y:hidden;overscroll-behavior-x:contain;scrollbar-width:thin;scrollbar-color:#70eda855 transparent}
 .project-nav::-webkit-scrollbar{height:4px}
 .project-nav::-webkit-scrollbar-thumb{background:#70eda855}
-.project-console .project-groups,.project-console .project-tabs{display:grid;grid-template-columns:repeat(8,minmax(0,1fr));border-bottom:0}
+.project-console .project-groups,.project-console .project-tabs{display:grid;grid-template-columns:repeat(9,minmax(0,1fr));border-bottom:0}
 .project-groups{background:#0a130e;border-bottom:1px solid var(--line)!important}
-.project-groups>span{grid-column:1/6;display:flex;align-items:center;min-height:38px;padding:0 18px;border-right:1px solid var(--line)}
-.project-groups>span.group-teach{grid-column:6/7}
-.project-groups>span.group-dev{grid-column:7/9;border-right:0}
+.project-groups>span{grid-column:1/9;display:flex;align-items:center;min-height:38px;padding:0 18px;border-right:1px solid var(--line)}
+.project-groups>span.group-teach{grid-column:9/10}
 .project-groups>span:after{content:'';flex:1;height:1px;margin-left:14px;background:linear-gradient(90deg,#70eda840,transparent)}
 .project-groups i{font-style:normal;font-weight:700;font-size:12px;letter-spacing:.12em;color:#c9dccf;position:sticky;left:18px;white-space:nowrap}
 .project-groups b{font:500 10px Poppins,sans-serif;letter-spacing:.06em;color:var(--green);margin-left:8px}
 
 .project-console .project-tabs button{display:flex;flex-direction:column;align-items:flex-start;justify-content:flex-start;gap:0;min-height:118px;padding:16px 16px 15px;font-size:14px;letter-spacing:.02em;line-height:1.45;border-right:1px solid var(--line);min-width:0}
 .project-console .project-tabs button:last-child{border-right:0}
-.project-console .project-tabs button:nth-child(5),.project-console .project-tabs button:nth-child(6){border-right:1px solid #70eda855}
+.project-console .project-tabs button:nth-child(8){border-right:1px solid #70eda855}
 .project-tabs .tab-top{display:flex;align-items:center;justify-content:space-between;gap:6px;width:100%;min-height:30px;margin:0 0 12px;color:inherit}
 .project-tabs .tab-top img{width:30px;height:30px;border-radius:8px;border:1px solid #a4c9ae42;display:block;flex-shrink:0}
 .project-tabs .tab-ph{display:block;width:30px;height:30px;border-radius:8px;border:1px dashed #d1bf7466;background:repeating-linear-gradient(135deg,#d1bf7412 0 4px,transparent 4px 8px);flex-shrink:0}
@@ -60,13 +59,13 @@
 
 /* Tablet and phone: the rail scrolls sideways inside the console; the page never does. */
 @media(max-width:1080px){
- .project-console .project-groups,.project-console .project-tabs{grid-template-columns:repeat(8,138px);width:max-content}
+ .project-console .project-groups,.project-console .project-tabs{grid-template-columns:repeat(9,138px);width:max-content}
  .project-swipe{display:flex;align-items:center;justify-content:flex-end;gap:10px;margin:0;padding:9px 14px;border-bottom:1px solid var(--line);font-size:11px;letter-spacing:.04em;color:#9cb3a3;background:#0a130e}
  .project-swipe span{color:var(--green);font-size:15px}
 }
 
 @media(max-width:700px){
- .project-console .project-groups,.project-console .project-tabs{grid-template-columns:repeat(8,124px)}
+ .project-console .project-groups,.project-console .project-tabs{grid-template-columns:repeat(9,124px)}
  .project-groups>span{min-height:34px;padding:0 12px}
  .project-groups i{font-size:11px;left:12px}
  .project-console .project-tabs button{min-height:104px;padding:13px 12px 12px;font-size:13px;display:flex;flex-direction:column;align-items:flex-start;justify-content:flex-start;gap:0}
@@ -97,7 +96,7 @@
 }
 
 @media(max-width:360px){
- .project-console .project-groups,.project-console .project-tabs{grid-template-columns:repeat(8,116px)}
+ .project-console .project-groups,.project-console .project-tabs{grid-template-columns:repeat(9,116px)}
  .project-console .project-tabs button{font-size:12px}
  .collection-card:not(.more) .card-preview{height:140px}
  .collection-card:not(.more) .card-preview>img{width:74px}

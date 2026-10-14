@@ -14,7 +14,7 @@ window.IWANT_PROJECTS = [
     "features": [
       [
         "範囲に合わせて",
-        "数学I・A・II・B・C・IIIの幅広い単元を演習。"
+        "数学I・A・II・B・C・IIIの幅広い単元と、共通テスト形式の教材59冊を演習。"
       ],
       [
         "難しさを選んで",
@@ -27,7 +27,7 @@ window.IWANT_PROJECTS = [
     ],
     "url": "https://apps.apple.com/jp/app/%E6%95%B0%E6%A5%B5/id6788627418",
     "support": "https://ottub.github.io/sugoku/support.html",
-    "version": "v2.0.2",
+    "version": "v2.1.3",
     "state": "App Storeで公開中",
     "price": "無料 / アプリ内課金・広告あり",
     "kind": "学ぶ",
@@ -64,7 +64,7 @@ window.IWANT_PROJECTS = [
     ],
     "url": "https://apps.apple.com/jp/app/%E7%89%A9%E7%90%86%E3%83%9E%E3%82%B9%E3%82%BF%E3%83%BC/id6796362607",
     "support": "https://ottub.github.io/physics/support.html",
-    "version": "v1.4.1",
+    "version": "v2.0.0",
     "state": "App Storeで公開中",
     "price": "無料 / 広告・アプリ内課金なし",
     "kind": "学ぶ",
@@ -82,12 +82,12 @@ window.IWANT_PROJECTS = [
     "headline": "化学基礎から、\n高分子まで。",
     "icon": "assets/chemistry-icon.png",
     "screen": "assets/chemistry-screen.png",
-    "screenAlt": "化学マスターの掲載用画像。「全932問・9章をこれ1つで」の見出しと、続きの分野、解く・章から・模試・調べる・記録のメニューが並ぶホーム画面。",
+    "screenAlt": "化学マスターのApp Store掲載画像。「全1,110問・9章」の見出しと、続きの分野、解く・章から・模試・調べる・記録のメニューが並ぶホーム画面。",
     "screenNote": "アプリの掲載用画像 / ホーム画面",
     "features": [
       [
         "解いて身につける",
-        "全932問。図表を使った問題も収録。"
+        "全1,110問。図表を使った問題も収録。"
       ],
       [
         "続ける仕組み",
@@ -100,7 +100,7 @@ window.IWANT_PROJECTS = [
     ],
     "url": "https://apps.apple.com/jp/app/%E5%8C%96%E5%AD%A6%E3%83%9E%E3%82%B9%E3%82%BF%E3%83%BC/id6788745347",
     "support": "https://ottub.github.io/chemistry/support.html",
-    "version": "v2.0.0",
+    "version": "v2.0.3",
     "state": "App Storeで公開中",
     "price": "無料 / アプリ内課金あり（化学マスター Pro 買い切り500円）",
     "kind": "学ぶ",
@@ -135,10 +135,10 @@ window.IWANT_PROJECTS = [
       ]
     ],
     "url": "https://apps.apple.com/jp/app/%E7%94%9F%E7%89%A9%E3%83%9E%E3%82%B9%E3%82%BF%E3%83%BC/id6796595184",
-    "support": "",
-    "version": "v1.4",
+    "support": "https://ottub.github.io/biology/support.html",
+    "version": "v2.0.0",
     "state": "App Storeで公開中",
-    "price": "無料 / 広告・アプリ内課金なし",
+    "price": "無料 / アプリ内課金あり（生物マスター Pro 買い切り500円）・広告なし",
     "kind": "学ぶ",
     "field": "高校生物",
     "devText": "",
@@ -167,12 +167,12 @@ window.IWANT_PROJECTS = [
       ],
       [
         "文法を押さえる",
-        "古典文法（活用・助動詞）の講義5回と、確認問題30問。"
+        "古典文法の講義12回と確認問題72問。"
       ]
     ],
     "url": "https://apps.apple.com/jp/app/%E5%8F%A4%E6%96%87%E8%94%B5/id6811652501",
     "support": "https://ottub.github.io/kobun-zo-site/support.html",
-    "version": "v1.0",
+    "version": "v1.0.1",
     "state": "App Storeで公開中",
     "price": "無料・広告あり / アプリ内課金あり（広告非表示 買い切り300円）",
     "kind": "学ぶ",
@@ -182,11 +182,122 @@ window.IWANT_PROJECTS = [
     "group": "learn"
   },
   {
+    "name": "英語マスター",
+    "en": "ENGLISH MASTER",
+    "category": "LANGUAGE / LEARNING",
+    "label": "06 / LANGUAGE",
+    "copy": "英単語・イディオム・文法から、共通テストのリーディング・リスニングまで。\n覚えた語は、翌日以降の復習でも確かめられます。",
+    "note": "iPhone・iPad / iOS 18.0以降",
+    "headline": "英語の基礎から、\n共通テストへ。",
+    "icon": "assets/english-icon.png",
+    "screen": "assets/english-screen.png",
+    "screenAlt": "英語マスターのApp Store掲載画像。リーディング模試の問題冊子と解答欄を並べた画面。",
+    "screenNote": "App Store掲載画像 / リーディング模試",
+    "features": [
+      [
+        "単語を覚える",
+        "CEFR-J A1〜B1の4,447語と、イディオム300件。"
+      ],
+      [
+        "文法を学ぶ",
+        "26単元の講義と確認問題78問。"
+      ],
+      [
+        "模試で解く",
+        "リーディング40題・リスニング30題の大問別演習と通し模試。"
+      ]
+    ],
+    "url": "https://apps.apple.com/jp/app/%E8%8B%B1%E8%AA%9E%E3%83%9E%E3%82%B9%E3%82%BF%E3%83%BC/id6816360716",
+    "support": "https://ottub.github.io/englishmaster/support.html",
+    "version": "v1.0.2",
+    "state": "App Storeで公開中",
+    "price": "無料 / アプリ内課金あり（有料版・買い切り）・広告あり",
+    "kind": "学ぶ",
+    "field": "英語学習",
+    "devText": "",
+    "devNote": "",
+    "group": "learn"
+  },
+  {
+    "name": "数極 中学",
+    "en": "SUGOKU JUNIOR",
+    "category": "MATHEMATICS / LEARNING",
+    "label": "07 / MATHEMATICS",
+    "copy": "中学1〜3年の数学を、単元と難易度を選んで練習。\n解いた問題を振り返り、学習の進み具合を確かめられます。",
+    "note": "iPhone・iPad / iOS 17.0以降",
+    "headline": "中学数学を、\n自分のペースで。",
+    "icon": "assets/junior-icon.png",
+    "screen": "assets/junior-screen.png",
+    "screenAlt": "数極 中学のApp Store掲載画像。学年を選び、単元と難易度を選択して練習を始める画面。",
+    "screenNote": "App Store掲載画像 / 単元選択",
+    "features": [
+      [
+        "単元から練習",
+        "数と式、関数、図形、データの活用から選べます。"
+      ],
+      [
+        "間違いを振り返る",
+        "解いた問題の確認やブックマーク、学習記録を使えます。"
+      ],
+      [
+        "極位戦に挑戦",
+        "参加を選ぶと、シーズンごとの極位戦でレートに挑戦できます。"
+      ]
+    ],
+    "url": "https://apps.apple.com/jp/app/%E6%95%B0%E6%A5%B5-%E4%B8%AD%E5%AD%A6/id6821298365",
+    "support": "https://ottub.github.io/sugoku-junior/support.html",
+    "version": "v1.0",
+    "state": "App Storeで公開中",
+    "price": "無料 / アプリ内課金あり（買い切りプレミアム）・広告なし",
+    "kind": "学ぶ",
+    "field": "中学数学",
+    "devText": "",
+    "devNote": "",
+    "group": "learn"
+  },
+  {
+    "name": "情報マスター",
+    "en": "INFORMATION MASTER",
+    "category": "INFORMATICS / LEARNING",
+    "label": "08 / INFORMATICS",
+    "copy": "情報Ⅰの講義・単元演習・大問型セットから、60分の共通テスト模試まで。\nプログラムとデータ分析も、手を動かして確かめられます。",
+    "note": "iPhone / iOS 18.0以降",
+    "headline": "情報Ⅰを、\n講義から模試まで。",
+    "icon": "assets/informatics-icon.png",
+    "screen": "assets/informatics-screen.png",
+    "screenAlt": "情報マスターのApp Store掲載画像。データ分析トレーナーの設問と散布図を表示した画面。",
+    "screenNote": "App Store掲載画像 / データ分析トレーナー",
+    "features": [
+      [
+        "講義と要点確認",
+        "情報Ⅰの四つの領域・20単元を学べます。"
+      ],
+      [
+        "プログラムを実行",
+        "1行ずつ実行し、変数や配列の変化を表で確かめられます。"
+      ],
+      [
+        "60分模試に挑戦",
+        "100点満点の模試を、問題冊子とマーク式の解答欄で解けます。"
+      ]
+    ],
+    "url": "https://apps.apple.com/jp/app/%E6%83%85%E5%A0%B1%E3%83%9E%E3%82%B9%E3%82%BF%E3%83%BC/id6818530141",
+    "support": "https://ottub.github.io/informatics/support.html",
+    "version": "v1.0",
+    "state": "App Storeで公開中",
+    "price": "無料 / アプリ内課金・広告なし",
+    "kind": "学ぶ",
+    "field": "情報Ⅰ",
+    "devText": "",
+    "devNote": "",
+    "group": "learn"
+  },
+  {
     "name": "カテキ",
     "category": "TUTORING / MANAGEMENT",
-    "label": "06 / TUTORING",
+    "label": "09 / TUTORING",
     "copy": "家庭教師のための指導管理アプリ。\n生徒・指導日・成績・月謝を、まとめて管理。",
-    "note": "iPhone・iPad / iOS 17.0以降",
+    "note": "iPhone / iOS 17.0以降",
     "headline": "指導の予定も、\n月謝の計算も。",
     "icon": "assets/kateki-icon.png",
     "screen": "assets/kateki-screen.png",
@@ -208,7 +319,7 @@ window.IWANT_PROJECTS = [
     ],
     "url": "https://apps.apple.com/jp/app/%E3%82%AB%E3%83%86%E3%82%AD/id6789912177",
     "support": "https://ottub.github.io/kateki-site/support.html",
-    "version": "v1.1.8",
+    "version": "v1.2.1",
     "state": "App Storeで公開中",
     "price": "無料（無料プランは先生側の画面に広告あり） / アプリ内課金あり（買い切り3,000円・月額1,980円・年額19,000円）",
     "kind": "教える",
@@ -216,65 +327,5 @@ window.IWANT_PROJECTS = [
     "devText": "",
     "devNote": "",
     "group": "teach"
-  },
-  {
-    "name": "英語マスター",
-    "en": "ENGLISH MASTER",
-    "category": "LANGUAGE / IN DEVELOPMENT",
-    "label": "07 / LANGUAGE",
-    "copy": "単語・文法から、共通テスト演習へ。\nつまずいても立ち戻れる英語学習アプリを、開発中です。",
-    "note": "iOS向けに開発中",
-    "headline": "わからない、を\n次の一歩に変える。",
-    "icon": "",
-    "screen": "",
-    "screenAlt": "",
-    "screenNote": "開発コンセプト / 実際のアプリ画面ではありません",
-    "features": [
-      [
-        "覚える",
-        "単語やイディオムを確かめて、学習の土台をつくる。"
-      ],
-      [
-        "演習する",
-        "文法から共通テスト形式の問題へ、理解をつなげる。"
-      ],
-      [
-        "立ち戻れる",
-        "つまずいたときの基礎レスキューと、復習の仕組みを開発中。"
-      ]
-    ],
-    "url": "",
-    "support": "",
-    "version": "IN DEVELOPMENT",
-    "state": "開発中",
-    "price": "開発中のため、内容は変更される場合があります。",
-    "kind": "学ぶ",
-    "field": "英語学習",
-    "devText": "単語から、\n共通テストへ。",
-    "devNote": "英語マスター / 開発中",
-    "group": "dev"
-  },
-  {
-    "name": "数極 中学",
-    "category": "MATHEMATICS / IN DEVELOPMENT",
-    "label": "08 / MATHEMATICS",
-    "copy": "中学数学のための数極を、開発しています。",
-    "note": "App Storeでは未公開",
-    "headline": "中学数学を、\n数極の手ざわりで。",
-    "icon": "",
-    "screen": "",
-    "screenAlt": "",
-    "screenNote": "開発中 / 実際のアプリ画面ではありません",
-    "features": [],
-    "url": "",
-    "support": "",
-    "version": "IN DEVELOPMENT",
-    "state": "開発中",
-    "price": "開発中のため、内容は変更される場合があります。",
-    "kind": "学ぶ",
-    "field": "中学数学",
-    "devText": "数極、\n中学数学へ。",
-    "devNote": "数極 中学 / 開発中",
-    "group": "dev"
   }
 ];
