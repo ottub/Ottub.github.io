@@ -1,0 +1,115 @@
+/* v3: 8 apps. Works selector (grouped tab rail), collection preview, support list. Loaded after typography.css. */
+
+/* ---------- Works: grouped tab rail ---------- */
+.project-nav{position:relative;border-bottom:1px solid var(--line);overflow-x:auto;overflow-y:hidden;overscroll-behavior-x:contain;scrollbar-width:thin;scrollbar-color:#70eda855 transparent}
+.project-nav::-webkit-scrollbar{height:4px}
+.project-nav::-webkit-scrollbar-thumb{background:#70eda855}
+.project-console .project-groups,.project-console .project-tabs{display:grid;grid-template-columns:repeat(8,minmax(0,1fr));border-bottom:0}
+.project-groups{background:#0a130e;border-bottom:1px solid var(--line)!important}
+.project-groups>span{grid-column:1/6;display:flex;align-items:center;min-height:38px;padding:0 18px;border-right:1px solid var(--line)}
+.project-groups>span.group-teach{grid-column:6/7}
+.project-groups>span.group-dev{grid-column:7/9;border-right:0}
+.project-groups>span:after{content:'';flex:1;height:1px;margin-left:14px;background:linear-gradient(90deg,#70eda840,transparent)}
+.project-groups i{font-style:normal;font-weight:700;font-size:12px;letter-spacing:.12em;color:#c9dccf;position:sticky;left:18px;white-space:nowrap}
+.project-groups b{font:500 10px Poppins,sans-serif;letter-spacing:.06em;color:var(--green);margin-left:8px}
+
+.project-console .project-tabs button{display:flex;flex-direction:column;align-items:flex-start;justify-content:flex-start;gap:0;min-height:118px;padding:16px 16px 15px;font-size:14px;letter-spacing:.02em;line-height:1.45;border-right:1px solid var(--line);min-width:0}
+.project-console .project-tabs button:last-child{border-right:0}
+.project-console .project-tabs button:nth-child(5),.project-console .project-tabs button:nth-child(6){border-right:1px solid #70eda855}
+.project-tabs .tab-top{display:flex;align-items:center;justify-content:space-between;gap:6px;width:100%;min-height:30px;margin:0 0 12px;color:inherit}
+.project-tabs .tab-top img{width:30px;height:30px;border-radius:8px;border:1px solid #a4c9ae42;display:block;flex-shrink:0}
+.project-tabs .tab-ph{display:block;width:30px;height:30px;border-radius:8px;border:1px dashed #d1bf7466;background:repeating-linear-gradient(135deg,#d1bf7412 0 4px,transparent 4px 8px);flex-shrink:0}
+.project-tabs .tab-state{font-style:normal;font-size:10px;line-height:1;color:#d1bf74;border:1px solid #d1bf7445;padding:4px 5px;white-space:nowrap;font-weight:400}
+.project-tabs button strong{font-weight:700;white-space:nowrap;display:block;max-width:100%;overflow:hidden;text-overflow:ellipsis}
+.project-console .project-tabs button small{display:block;margin-top:3px;font-size:10px;font-weight:400;letter-spacing:.04em;color:#8fab9a;white-space:nowrap}
+.project-console .project-tabs button[aria-selected=true] small{color:#9fdcb7}
+.project-console .project-tabs button:not([aria-selected=true]):hover{background:#12241a;color:#d6eadc}
+.project-console .project-tabs button[aria-selected=true] .tab-top img{border-color:#70eda888}
+.project-swipe{display:none}
+
+/* Panel additions */
+#project-kind{font-size:11px;letter-spacing:.08em;color:#8fc9a6;margin:0 0 3px;line-height:1.5}
+.product-top>div{min-width:0}
+.dev-visual>span{display:block}
+
+/* ---------- Collection preview (hero reveal) ---------- */
+.collection-cards{grid-template-columns:repeat(4,1fr);width:min(100%,1120px)}
+.collection-card.more .card-preview{display:flex;flex-direction:column;align-items:flex-start;gap:16px;text-align:left;padding:24px 20px;background:linear-gradient(145deg,#13251a88,transparent)}
+.more-icons{display:flex;gap:8px}
+.more-icons img{width:40px;height:40px;border-radius:10px;box-shadow:0 0 0 1px #739b8055}
+.collection-card.more ul{list-style:none;margin:0;padding:0;display:grid;gap:7px;font-size:13px;font-weight:700;color:#c5dccd;line-height:1.4}
+.collection-card.more li{display:flex;align-items:center;gap:8px}
+.collection-card.more li:before{content:'+';font:11px monospace;color:var(--green)}
+.collection-card.more li small{font-size:10px;font-weight:400;color:#c5bd97}
+
+/* ---------- Support list: 5 apps ---------- */
+.support-list a{padding:19px 0}
+
+/* ---------- Updates: 4 cards ---------- */
+.update-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+.update-card{display:flex;flex-direction:column}
+.update-card p{margin-bottom:25px}
+.update-card>a{margin-top:auto}
+
+@media(max-width:1100px){
+ .collection-cards{gap:14px}
+ .collection-card.more .card-preview{padding:18px 14px;gap:12px}
+ .more-icons img{width:32px;height:32px;border-radius:8px}
+ .collection-card.more ul{font-size:12px;gap:5px}
+}
+
+/* Tablet and phone: the rail scrolls sideways inside the console; the page never does. */
+@media(max-width:1080px){
+ .project-console .project-groups,.project-console .project-tabs{grid-template-columns:repeat(8,138px);width:max-content}
+ .project-swipe{display:flex;align-items:center;justify-content:flex-end;gap:10px;margin:0;padding:9px 14px;border-bottom:1px solid var(--line);font-size:11px;letter-spacing:.04em;color:#9cb3a3;background:#0a130e}
+ .project-swipe span{color:var(--green);font-size:15px}
+}
+
+@media(max-width:700px){
+ .project-console .project-groups,.project-console .project-tabs{grid-template-columns:repeat(8,124px)}
+ .project-groups>span{min-height:34px;padding:0 12px}
+ .project-groups i{font-size:11px;left:12px}
+ .project-console .project-tabs button{min-height:104px;padding:13px 12px 12px;font-size:13px;display:flex;flex-direction:column;align-items:flex-start;justify-content:flex-start;gap:0}
+ .project-tabs .tab-top{margin-bottom:10px;min-height:26px}
+ .project-tabs .tab-top img,.project-tabs .tab-ph{width:26px;height:26px;border-radius:7px}
+ .project-tabs .tab-state{font-size:9px;padding:3px 4px}
+ .project-console .project-tabs button small{font-size:10px;display:block}
+ .project-swipe{font-size:10px;padding:8px 12px}
+ #project-kind{font-size:10px}
+ .dev-visual>span{font-size:30px}
+
+ .collection-cards{grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+ .collection-card:not(.more) .card-preview{height:160px;padding-top:14px}
+ .collection-card:not(.more) .card-preview>img{width:84px}
+ .collection-card:not(.more) .card-title{padding:11px 8px;font-size:11px}
+ .collection-card:not(.more) .card-title b{display:none}
+ .collection-card.more{grid-column:1/-1}
+ .collection-card.more .card-preview{flex-direction:row;align-items:center;height:auto;padding:12px 14px;border-bottom:0}
+ .collection-card.more ul{display:none}
+ .more-icons img{width:30px;height:30px}
+ .collection-card.more .card-title{padding:0 14px 0 0;margin-left:auto}
+ .collection-card.more{display:flex;align-items:center}
+ .collection-card.more .card-title small{display:inline-block;margin:0 0 0 12px}
+ .collection-card.more .card-title b{margin-left:14px}
+
+ .support-list a{padding:18px 0}
+ .update-grid{grid-template-columns:1fr}
+}
+
+@media(max-width:360px){
+ .project-console .project-groups,.project-console .project-tabs{grid-template-columns:repeat(8,116px)}
+ .project-console .project-tabs button{font-size:12px}
+ .collection-card:not(.more) .card-preview{height:140px}
+ .collection-card:not(.more) .card-preview>img{width:74px}
+ .collection-card:not(.more) .card-title small{font-size:8px}
+ .collection-card:not(.more) .card-title{font-size:10px;padding:10px 6px}
+ .collection-card:not(.more) .card-title>span{white-space:nowrap}
+ .collection-card.more .card-title small{display:none}
+}
+
+@media(max-width:700px) and (max-height:700px){
+ .collection-card:not(.more) .card-preview{height:130px}
+}
+
+/* v3.1: 本文の折り返しを整える（行末の1〜2字残りと語の途中の改行を減らす。未対応ブラウザは従来どおり） */
+#project-copy,#product-features span,#price-note,.update-card p,.preview-note,.works-heading>p,.support-grid p,.about-copy p,.image-dialog-top+img+p{text-wrap:pretty;word-break:auto-phrase}

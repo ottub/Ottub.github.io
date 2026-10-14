@@ -1,0 +1,18 @@
+/* 数極のイメージソング「Q」: lyric video block between the works and the updates.
+   Same vocabulary as the rest of the page: thin green-grey frame, + corner mark, mono-ish meta line.
+   Two columns like the support block (text left, player right); one column on phones. */
+.song{padding:40px var(--pad) 50px;max-width:1700px;margin:auto;display:grid;grid-template-columns:minmax(240px,1fr) minmax(0,2.4fr);grid-template-areas:"head player" "note player";grid-template-rows:auto 1fr;gap:22px 56px;align-items:start}
+.song .subsection-heading{grid-area:head;display:block;margin:0}
+.song .subsection-heading>p{margin-top:18px;line-height:2}
+.song-player{grid-area:player;margin:0;position:relative;border:1px solid #75937e40;background:linear-gradient(120deg,#11251a66,#080f0d 60%);padding:14px}
+.song-player:before{content:'+';color:var(--green);position:absolute;left:-5px;top:-10px;font:16px monospace;z-index:1}
+.song-frame{position:relative;aspect-ratio:16/9;background:#000;overflow:hidden}
+.song-frame video{display:block;width:100%;height:100%;object-fit:contain;background:#000}
+.song-frame video:focus-visible{outline:2px solid var(--green);outline-offset:-2px}
+.song-frame p{padding:20px;font-size:12px;line-height:1.9;color:#c0d7c9}
+.song-frame p a{color:var(--green);text-decoration:underline}
+.song-meta{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:12px 2px 0;font-size:11px;line-height:1.8;color:#86bd9a}
+.song-meta span:last-child{color:#99ad9f}
+.song-note{grid-area:note;font-size:11px;line-height:1.9;color:#9cb2a4;max-width:340px}
+@media(max-width:1000px){.song{grid-template-columns:1fr;grid-template-areas:"head" "player" "note";grid-template-rows:none;gap:20px}.song-note{max-width:none}}
+@media(max-width:700px){.song{padding:25px var(--pad) 36px}.song-player{padding:8px}.song-meta{font-size:10px;padding-top:10px}.song-note{font-size:10px}}

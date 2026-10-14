@@ -1,0 +1,42 @@
+/* Hero scroll effect as CSS scroll-driven animations.
+   app.js sets html.hero-sda only where `animation-timeline: scroll()` works; everywhere else (and
+   without JS) app.js / refined.css keep the previous behaviour. The browser then derives every frame
+   of the effect from the scroll position itself: no script runs per scroll, and Safari 26.4+ and
+   Chromium update transform/opacity scroll-driven animations off the main thread (threaded), so the
+   rotating WebGL wheel or any other main-thread work cannot make the effect lag behind the finger.
+
+   Progress p (0..1) is the same as app.js used: p = scrollY / (height of .opening - height of the
+   sticky stage). .opening starts right under the header; the sizes come from refined.css:
+     width > 700px : .opening 185svh, stage max(100svh - 86px, 560px) (min-height), header 86px
+     width <= 700px: .opening 180svh, stage max(100svh - 76px, 500px) (min-height), header 76px */
+html{--hero-header:86px;--hero-range:calc(185svh - max(100svh - 86px, 560px))}
+@media(max-width:700px){html{--hero-header:76px;--hero-range:calc(180svh - max(100svh - 76px, 500px))}}
+
+/* Markers for app.js (IntersectionObserver): each reaches the top of the viewport exactly when p passes
+   its threshold, so the inert/aria-hidden switches need no scroll listener either. */
+.hero-mark{position:absolute;left:0;width:1px;height:1px;pointer-events:none;visibility:hidden}
+.hero-mark-copy{top:calc(var(--hero-range) * .393 - var(--hero-header))}  /* copy faded out */
+.hero-mark-cards{top:calc(var(--hero-range) * .66 - var(--hero-header))}  /* cards nearly in place */
+
+@media (prefers-reduced-motion:no-preference) and (height > 650px){
+html.hero-sda body:not(.motion-off) :is(.core-object,.opening-copy,.collection-preview,.scroll-invitation){
+  animation-timeline:scroll(root block);animation-range:0px var(--hero-range);
+  animation-duration:auto;animation-timing-function:linear;animation-fill-mode:both}
+html.hero-sda body:not(.motion-off) .core-object{animation-name:hero-core}
+html.hero-sda body:not(.motion-off) .opening-copy{animation-name:hero-copy}
+html.hero-sda body:not(.motion-off) .collection-preview{animation-name:hero-cards}
+html.hero-sda body:not(.motion-off) .scroll-invitation{animation-name:hero-invite}
+}
+@media (prefers-reduced-motion:no-preference) and (height > 650px) and (max-width:700px){
+html.hero-sda body:not(.motion-off) .core-object{animation-name:hero-core-phone}
+html.hero-sda body:not(.motion-off) .opening-copy{animation-name:hero-copy-phone}
+}
+
+/* Same curves as the script version: wheel over the whole range, copy fades over p .05-.40,
+   cards rise over p .30-.70, the scroll hint fades over p 0-.25. */
+@keyframes hero-core{from{transform:translate(0%,0%) scale(1);opacity:1}to{transform:translate(-12%,-15%) scale(.52);opacity:.2}}
+@keyframes hero-core-phone{from{transform:translate(0%,0%) scale(1);opacity:.88}to{transform:translate(-12%,-15%) scale(.52);opacity:.08}}
+@keyframes hero-copy{0%,5%{transform:translateY(-55%);opacity:1}40%,100%{transform:translateY(calc(-55% - 30px));opacity:0}}
+@keyframes hero-copy-phone{0%,5%{transform:translateY(0);opacity:1}40%,100%{transform:translateY(-30px);opacity:0}}
+@keyframes hero-cards{0%,30%{transform:translateY(80px);opacity:0}70%,100%{transform:translateY(0);opacity:1}}
+@keyframes hero-invite{0%{opacity:1}25%,100%{opacity:0}}

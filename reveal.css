@@ -1,0 +1,123 @@
+/* Scroll reveal for the blocks below the hero (app.js marks each group .rv, then .is-in once it enters,
+   then .rv-done when the entrance has finished).
+   - Content is hidden only under html.rv-on (set by app.js after the observer is running), with motion ON
+     and no reduced-motion request. Without JS, with motion OFF or reduced motion, nothing here applies.
+   - Only transform, opacity and clip-path animate. Every rule is scoped to :not(.rv-done), so a finished
+     group renders exactly as the approved design (no clip, no extra lines, original transitions).
+   Vocabulary: rise = fade + 24px lift / scan = mint scan line wipes the heading in / line = a mint rule
+   draws along a border and fades back to it / lock = the + corner marks spin into place. */
+
+html.rv-on{--rv-scan:cubic-bezier(.77,0,.18,1);--rv-rise:cubic-bezier(.16,1,.3,1);--rv-fade:cubic-bezier(.2,.7,.2,1)}
+
+@media screen and (prefers-reduced-motion:no-preference){
+
+/* ---------- rise ---------- */
+html.rv-on body:not(.motion-off) :is(
+  .works-heading.rv:not(.rv-done)>p,
+  .project-console.rv:not(.rv-done) :is(.project-groups,.project-tabs>button,.project-swipe),
+  .project-info.rv:not(.rv-done)>*,
+  .preview-note.rv:not(.rv-done),
+  .song-note.rv:not(.rv-done),
+  .subsection-heading.rv:not(.rv-done)>p,
+  .update-card.rv:not(.rv-done),
+  .about.rv:not(.rv-done) .about-copy>p,
+  .support-grid.rv:not(.rv-done)>div>p,
+  .support-list.rv:not(.rv-done)>a,
+  .site-footer.rv:not(.rv-done)>div){
+  --rv-d:calc(var(--rv-base,0ms) + var(--i,0) * var(--rv-step,70ms));
+  transition:opacity .75s var(--rv-fade) var(--rv-d),transform 1s var(--rv-rise) var(--rv-d)}
+/* the tabs keep their own hover transitions while they rise */
+html.rv-on body:not(.motion-off) .project-console.rv:not(.rv-done) .project-tabs>button{
+  transition:opacity .75s var(--rv-fade) var(--rv-d),transform 1s var(--rv-rise) var(--rv-d),background .2s,color .2s}
+
+html.rv-on body:not(.motion-off) :is(
+  .works-heading.rv:not(.is-in)>p,
+  .project-console.rv:not(.is-in) :is(.project-groups,.project-tabs>button,.project-swipe),
+  .project-info.rv:not(.is-in)>*,
+  .preview-note.rv:not(.is-in),
+  .song-note.rv:not(.is-in),
+  .subsection-heading.rv:not(.is-in)>p,
+  .update-card.rv:not(.is-in),
+  .about.rv:not(.is-in) .about-copy>p,
+  .support-grid.rv:not(.is-in)>div>p,
+  .support-list.rv:not(.is-in)>a,
+  .site-footer.rv:not(.is-in)>div){
+  opacity:0;transform:translate3d(0,24px,0)}
+
+/* order inside each group (--i is the element's index, set once by app.js) */
+html.rv-on :is(.works-heading,.subsection-heading)>p{--rv-base:160ms}
+html.rv-on .project-console .project-tabs>button{--rv-base:80ms;--rv-step:45ms}
+html.rv-on .project-console .project-swipe{--rv-base:260ms}
+html.rv-on .project-info>*{--rv-base:180ms}
+html.rv-on .about-copy>p{--rv-base:260ms;--rv-step:120ms}
+html.rv-on .support-grid>div>p{--rv-base:180ms}
+html.rv-on .support-list>a{--rv-step:60ms}
+html.rv-on .site-footer>.footer-main{--rv-base:140ms}
+html.rv-on .site-footer>.footer-bottom{--rv-base:260ms}
+
+/* ---------- scan: headings are wiped in left to right behind a mint scan line ---------- */
+html.rv-on body:not(.motion-off) :is(.works-heading,.subsection-heading,.about,.support-grid).rv:not(.rv-done) h2{
+  position:relative;width:fit-content;max-width:100%;
+  clip-path:inset(-.2em -.3em -.2em -.3em);
+  transition:clip-path 1s var(--rv-scan) var(--rv-h,0ms)}
+html.rv-on body:not(.motion-off) :is(.works-heading,.subsection-heading,.about,.support-grid).rv:not(.is-in) h2{
+  clip-path:inset(-.2em calc(100% + .3em) -.2em -.3em)}
+html.rv-on body:not(.motion-off) :is(.works-heading,.subsection-heading,.about,.support-grid).rv:not(.rv-done) h2::after{
+  content:'';position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(90deg,#70eda800 calc(100% - 64px),#70eda826 calc(100% - 4px),#c8ffe0 calc(100% - 1px));
+  transform:translateX(-100%);
+  transition:transform 1s var(--rv-scan) var(--rv-h,0ms),opacity .45s ease calc(var(--rv-h,0ms) + .85s)}
+html.rv-on body:not(.motion-off) :is(.works-heading,.subsection-heading,.about,.support-grid).rv.is-in:not(.rv-done) h2::after{
+  transform:none;opacity:0}
+html.rv-on .about h2{--rv-h:140ms}
+
+/* ---------- scan down: the app artwork opens top to bottom behind a horizontal scan line ---------- */
+html.rv-on body:not(.motion-off) .project-art.rv:not(.rv-done){
+  clip-path:inset(0);transition:clip-path 1.1s var(--rv-scan) 120ms}
+html.rv-on body:not(.motion-off) .project-art.rv:not(.is-in){clip-path:inset(0 0 100% 0)}
+html.rv-on body:not(.motion-off) .project-art.rv:not(.rv-done)::before{
+  content:'';position:absolute;inset:0;z-index:3;pointer-events:none;
+  background:linear-gradient(180deg,#70eda800 calc(100% - 90px),#70eda81c calc(100% - 4px),#c8ffe0 calc(100% - 1px));
+  transform:translateY(-100%);
+  transition:transform 1.1s var(--rv-scan) 120ms,opacity .5s ease 1.1s}
+html.rv-on body:not(.motion-off) .project-art.rv.is-in:not(.rv-done)::before{transform:none;opacity:0}
+
+/* the lyric-video frame opens the same way (its + mark stays outside the clip until the end) */
+html.rv-on body:not(.motion-off) .song-player.rv:not(.rv-done){
+  clip-path:inset(-12px -8px 0 -8px);transition:clip-path 1.1s var(--rv-scan) 120ms}
+html.rv-on body:not(.motion-off) .song-player.rv:not(.is-in){clip-path:inset(-12px -8px 100% -8px)}
+html.rv-on body:not(.motion-off) .song-player.rv:not(.rv-done) .song-frame::after{
+  content:'';position:absolute;inset:0;z-index:3;pointer-events:none;
+  background:linear-gradient(180deg,#70eda800 calc(100% - 90px),#70eda81c calc(100% - 4px),#c8ffe0 calc(100% - 1px));
+  transform:translateY(-100%);
+  transition:transform 1.1s var(--rv-scan) 120ms,opacity .5s ease 1.1s}
+html.rv-on body:not(.motion-off) .song-player.rv.is-in:not(.rv-done) .song-frame::after{transform:none;opacity:0}
+html.rv-on .song-note{--rv-base:260ms}
+
+/* ---------- line: a mint rule draws along the top border, then fades back into it ---------- */
+html.rv-on body:not(.motion-off) :is(.about,.site-footer).rv:not(.rv-done){position:relative}
+html.rv-on body:not(.motion-off) :is(.about,.site-footer).rv:not(.rv-done)::before,
+html.rv-on body:not(.motion-off) .update-card.rv:not(.rv-done)::after{
+  content:'';position:absolute;left:0;right:0;top:-1px;height:1px;pointer-events:none;
+  background:linear-gradient(90deg,#70eda8,#70eda8 55%,#70eda800);
+  transform:scaleX(0);transform-origin:0 50%;
+  transition:transform 1.1s var(--rv-scan) var(--rv-base,0ms),opacity .6s ease calc(var(--rv-base,0ms) + 1s)}
+html.rv-on body:not(.motion-off) .update-card.rv:not(.rv-done)::after{left:-1px;right:-1px}
+html.rv-on body:not(.motion-off) :is(.about,.site-footer).rv.is-in:not(.rv-done)::before,
+html.rv-on body:not(.motion-off) .update-card.rv.is-in:not(.rv-done)::after{transform:none;opacity:0}
+
+/* ---------- lock: + corner marks spin into place ---------- */
+html.rv-on body:not(.motion-off) .project-console.rv:not(.rv-done)::before,
+html.rv-on body:not(.motion-off) .project-console.rv:not(.rv-done)::after,
+html.rv-on body:not(.motion-off) .update-card.rv:not(.rv-done)::before{
+  transition:opacity .4s ease calc(var(--rv-base,0ms) + 220ms),transform .7s var(--rv-fade) calc(var(--rv-base,0ms) + 220ms)}
+html.rv-on body:not(.motion-off) .project-console.rv:not(.is-in)::before,
+html.rv-on body:not(.motion-off) .project-console.rv:not(.is-in)::after,
+html.rv-on body:not(.motion-off) .update-card.rv:not(.is-in)::before{
+  opacity:0;transform:rotate(-90deg) scale(.3)}
+}
+
+/* two-column update grid: the right-hand card follows its neighbour */
+@media screen and (prefers-reduced-motion:no-preference) and (min-width:701px){
+html.rv-on .update-card:nth-child(2n){--rv-base:110ms}
+}

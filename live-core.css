@@ -1,0 +1,8 @@
+.core-object{isolation:isolate;inset:0 -2% 0 25%;grid-template:minmax(0,1fr)/minmax(0,1fr)}
+.core-object>img,.core-object>canvas{grid-area:1/1}
+.core-object>canvas{width:100%;height:100%;max-width:900px;min-height:0;object-fit:contain;display:block;pointer-events:none}
+/* display:none (not visibility:hidden): with the fallback image out of the render tree the scroll-scaled
+   .core-object layer has nothing of its own to paint (mask + blend + filter), only the WebGL canvas. */
+.core-object[data-engine=ready]>img{display:none}
+.core-object[data-engine=failed]>canvas{display:none}
+@media(max-width:700px){.core-object{inset:37% -12% 7%}.core-object>canvas{width:100%;max-height:100%}}
