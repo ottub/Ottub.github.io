@@ -54,7 +54,8 @@ function select(index,focus=false,animate=true){const previous=selected;selected
  $('#product-features').hidden=!p.features.length;$('#product-features').replaceChildren(...p.features.map(([title,copy])=>{const li=document.createElement('li'),a=document.createElement('strong'),b=document.createElement('span');a.textContent=title;b.textContent=copy;li.append(a,b);return li}));
  $('#product-icon').hidden=!p.icon;if(p.icon){$('#product-icon').src=p.icon;$('#product-icon').alt=p.name+'のアプリアイコン'}
  if(!p.screen){lines($('#dev-visual-text'),p.devText||p.name);$('#dev-visual-note').textContent=p.devNote||p.name+' / '+p.state}
- $('#screen-open').hidden=!p.screen;$('#dev-visual').hidden=!!p.screen;$('.project-art').classList.toggle('is-dev',!p.screen);$('#screen-note').textContent=p.screenNote;
+ const video=$('#product-video');video.pause();video.hidden=!p.video;if(p.video&&video.getAttribute('src')!==p.video){video.poster=p.videoPoster;video.src=p.video;video.setAttribute('aria-label',p.videoLabel)}
+ $('#screen-open').hidden=!p.screen||!!p.video;$('#dev-visual').hidden=!!p.screen;$('.project-art').classList.toggle('is-dev',!p.screen);$('#screen-note').textContent=p.video?p.videoNote:p.screenNote;
  if(p.screen){$('#product-screen').src=p.screen;$('#product-screen').alt=p.screenAlt;$('#screen-open').setAttribute('aria-label',p.name+'の画像を拡大')}
  $('#store-link').hidden=!p.url;$('#support-link').hidden=!p.support;$('#development-state').hidden=!!p.url;
  if(p.url)$('#store-link').href=p.url;else $('#store-link').removeAttribute('href');if(p.support)$('#support-link').href=p.support;else $('#support-link').removeAttribute('href');

@@ -11,6 +11,10 @@ window.IWANT_PROJECTS = [
     "screen": "assets/sugoku-screen.png",
     "screenAlt": "数極の掲載用画像。三角形の図と分数の入力欄を使って正弦定理の問題を解く画面。",
     "screenNote": "アプリの掲載用画像 / 図形の演習",
+    "video": "assets/sugoku-intro.mp4",
+    "videoPoster": "assets/sugoku-intro-poster.jpg",
+    "videoLabel": "数極の紹介動画",
+    "videoNote": "アプリ紹介動画 / 21秒・音声あり",
     "features": [
       [
         "範囲に合わせて",
@@ -84,6 +88,10 @@ window.IWANT_PROJECTS = [
     "screen": "assets/chemistry-screen.png",
     "screenAlt": "化学マスターのApp Store掲載画像。「全1,110問・9章」の見出しと、続きの分野、解く・章から・模試・調べる・記録のメニューが並ぶホーム画面。",
     "screenNote": "アプリの掲載用画像 / ホーム画面",
+    "video": "assets/chemistry-intro.mp4",
+    "videoPoster": "assets/chemistry-intro-poster.jpg",
+    "videoLabel": "化学マスターの紹介動画",
+    "videoNote": "アプリ紹介動画 / 27秒・音声あり",
     "features": [
       [
         "解いて身につける",
@@ -267,6 +275,10 @@ window.IWANT_PROJECTS = [
     "screen": "assets/informatics-screen.png",
     "screenAlt": "情報マスターのApp Store掲載画像。データ分析トレーナーの設問と散布図を表示した画面。",
     "screenNote": "App Store掲載画像 / データ分析トレーナー",
+    "video": "assets/informatics-intro.mp4",
+    "videoPoster": "assets/informatics-intro-poster.jpg",
+    "videoLabel": "情報マスターの紹介動画",
+    "videoNote": "アプリ紹介動画 / 21秒・音声あり",
     "features": [
       [
         "講義と要点確認",
