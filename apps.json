@@ -1,0 +1,77 @@
+{
+  "version": 1,
+  "apps": [
+    {
+      "id": "6788627418",
+      "name": "数極",
+      "field": "高校数学",
+      "copy": "高校数学を、単元ごとの演習と「極位戦」で。",
+      "icon": "https://ottub.github.io/assets/sugoku-icon.png",
+      "url": "https://apps.apple.com/jp/app/id6788627418"
+    },
+    {
+      "id": "6796362607",
+      "name": "物理マスター",
+      "field": "高校物理",
+      "copy": "高校物理を、図解・アニメーション・実験で。",
+      "icon": "https://ottub.github.io/assets/physics-icon.png",
+      "url": "https://apps.apple.com/jp/app/id6796362607"
+    },
+    {
+      "id": "6788745347",
+      "name": "化学マスター",
+      "field": "高校化学",
+      "copy": "高校化学の9章48分野を、ひとつのアプリで。",
+      "icon": "https://ottub.github.io/assets/chemistry-icon.png",
+      "url": "https://apps.apple.com/jp/app/id6788745347"
+    },
+    {
+      "id": "6796595184",
+      "name": "生物マスター",
+      "field": "高校生物",
+      "copy": "生物基礎と生物を、問題集・講義・3D・バーチャル実験で。",
+      "icon": "https://ottub.github.io/assets/biology-icon.png",
+      "url": "https://apps.apple.com/jp/app/id6796595184"
+    },
+    {
+      "id": "6811652501",
+      "name": "古文蔵",
+      "field": "高校国語",
+      "copy": "古文9作品を、読んで、声に出して、解いて。",
+      "icon": "https://ottub.github.io/assets/kobunzo-icon.png",
+      "url": "https://apps.apple.com/jp/app/id6811652501"
+    },
+    {
+      "id": "6816360716",
+      "name": "英語マスター",
+      "field": "英語学習",
+      "copy": "英単語・イディオム・文法から、共通テストのリーディング・リスニングまで。",
+      "icon": "https://ottub.github.io/assets/english-icon.png",
+      "url": "https://apps.apple.com/jp/app/id6816360716"
+    },
+    {
+      "id": "6821298365",
+      "name": "数極 中学",
+      "field": "中学数学",
+      "copy": "中学1〜3年の数学を、単元と難易度を選んで練習。",
+      "icon": "https://ottub.github.io/assets/junior-icon.png",
+      "url": "https://apps.apple.com/jp/app/id6821298365"
+    },
+    {
+      "id": "6818530141",
+      "name": "情報マスター",
+      "field": "情報Ⅰ",
+      "copy": "情報Ⅰの講義・単元演習・大問型セットから、60分の共通テスト模試まで。",
+      "icon": "https://ottub.github.io/assets/informatics-icon.png",
+      "url": "https://apps.apple.com/jp/app/id6818530141"
+    },
+    {
+      "id": "6789912177",
+      "name": "カテキ",
+      "field": "指導管理",
+      "copy": "家庭教師のための指導管理アプリ。",
+      "icon": "https://ottub.github.io/assets/kateki-icon.png",
+      "url": "https://apps.apple.com/jp/app/id6789912177"
+    }
+  ]
+}

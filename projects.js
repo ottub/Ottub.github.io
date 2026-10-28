@@ -1,3 +1,4 @@
+// projects.js を変えたら python3 tools/build_apps_json.py を流す。
 window.IWANT_PROJECTS = [
   {
     "name": "数極",
