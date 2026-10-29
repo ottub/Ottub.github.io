@@ -340,5 +340,41 @@ window.IWANT_PROJECTS = [
     "devText": "",
     "devNote": "",
     "group": "teach"
+  },
+  {
+    "name": "国語マスター",
+    "category": "JAPANESE / IN DEVELOPMENT",
+    "label": "10 / JAPANESE",
+    "copy": "共通テストの国語を、本番と同じ紙面の冊子で解く。\n入試頻出現代語の単語帳も。",
+    "note": "App Storeでは未公開",
+    "headline": "共通テスト国語を、\n本番と同じ紙面で。",
+    "icon": "",
+    "screen": "",
+    "screenAlt": "",
+    "screenNote": "開発中 / 実際のアプリ画面ではありません",
+    "features": [
+      [
+        "通し模試",
+        "共通テストの国語の形式の通し模試を、本番と同じ紙面の冊子で解けます。"
+      ],
+      [
+        "冊子に書き込み",
+        "Apple Pencil または指で書き込めます。"
+      ],
+      [
+        "現代語の単語帳",
+        "入試頻出現代語を収録しています。"
+      ]
+    ],
+    "url": "",
+    "support": "https://ottub.github.io/kokugo/support.html",
+    "version": "IN DEVELOPMENT",
+    "state": "開発中",
+    "price": "開発中のため、内容は変更される場合があります。",
+    "kind": "学ぶ",
+    "field": "高校国語",
+    "devText": "共通テスト国語を、\n本番と同じ紙面で。",
+    "devNote": "国語マスター / 開発中",
+    "group": "dev"
   }
 ];
