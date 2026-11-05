@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>地理マスター</title>
+<style>
+  :root { --accent:#D23B1E; --bg:#ECEEF1; --fg:#1A1A1D; --muted:#5a5f66; --line:#C9CDD3; --paper:#FFFFFF; }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --bg:#16171B; --fg:#E9EAEE; --muted:#9aa0a8; --line:#2c2f36; --paper:#1f2126; } }
+  :root[data-theme="dark"] { --bg:#16171B; --fg:#E9EAEE; --muted:#9aa0a8; --line:#2c2f36; --paper:#1f2126; }
+  body { margin:0; font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Segoe UI",sans-serif;
+         background:var(--bg); color:var(--fg); line-height:1.8; text-align:center; }
+  .hero { padding:72px 24px 48px; }
+  .hero h1 { margin:0; font-size:32px; font-weight:700; letter-spacing:.04em; }
+  .hero .bar { width:96px; height:4px; border-radius:2px; background:var(--accent); margin:14px auto 0; }
+  .hero p { margin:12px 0 0; color:var(--muted); }
+  main { max-width:520px; margin:0 auto; padding:8px 24px 40px; }
+  .status { display:inline-block; margin:0 0 20px; padding:4px 12px; border:1px solid var(--accent); color:var(--accent); border-radius:999px; font-size:13px; font-weight:600; }
+  .note { color:var(--muted); font-size:14px; text-align:left; margin:0 0 20px; }
+  a.btn { display:block; margin:14px 0; padding:16px; border:1px solid var(--line); border-radius:12px;
+          text-decoration:none; color:var(--fg); font-weight:600; background:var(--paper); }
+  a.btn:hover { border-color:var(--accent); }
+  footer { color:var(--muted); font-size:12px; padding:24px; }
+</style>
+</head>
+<body>
+  <!-- 「開発中」の印は、App Store に出した後に外す -->
+  <div class="hero">
+    <h1>地理マスター</h1>
+    <div class="bar"></div>
+    <p>共通テスト「地理総合，地理探究」の対策</p>
+  </div>
+  <main>
+    <span class="status">開発中</span>
+    <p class="note">App Store での公開は準備中です。公開されたら、このページからアプリのページへ移れます。</p>
+    <a class="btn" href="support.html">サポート</a>
+    <a class="btn" href="privacy.html">プライバシーポリシー</a>
+  </main>
+  <footer>© 2026 i want</footer>
+</body>
+</html>

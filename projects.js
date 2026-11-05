@@ -376,5 +376,37 @@ window.IWANT_PROJECTS = [
     "devText": "共通テスト国語を、\n本番と同じ紙面で。",
     "devNote": "国語マスター / 開発中",
     "group": "dev"
+  },
+  {
+    "name": "地理マスター",
+    "category": "GEOGRAPHY / IN DEVELOPMENT",
+    "label": "11 / GEOGRAPHY",
+    "copy": "共通テストの地理を、資料の型ごとに解く。\n雨温図・散布図・統計表などを、型で練習する。",
+    "note": "App Storeでは未公開",
+    "headline": "共通テスト地理を、\n資料の型から解く。",
+    "icon": "",
+    "screen": "",
+    "screenAlt": "",
+    "screenNote": "開発中 / 実際のアプリ画面ではありません",
+    "features": [
+      [
+        "型別演習",
+        "雨温図・散布図・統計表など、資料の型ごとに問題を解けます。"
+      ],
+      [
+        "模試",
+        "30問の模試を、第1回・第2回の2回分解けます。"
+      ]
+    ],
+    "url": "",
+    "support": "https://ottub.github.io/geography/support.html",
+    "version": "IN DEVELOPMENT",
+    "state": "開発中",
+    "price": "無料 / 開発中のため、内容は変更される場合があります。",
+    "kind": "学ぶ",
+    "field": "高校地理",
+    "devText": "共通テスト地理を、\n資料の型から解く。",
+    "devNote": "地理マスター / 開発中",
+    "group": "dev"
   }
 ];
