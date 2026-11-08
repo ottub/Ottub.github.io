@@ -1,0 +1,12 @@
+{
+  "applinks": {
+    "details": [
+      {
+        "appIDs": ["2CNDZ4WJ26.jp.iwant.kairan"],
+        "components": [
+          { "/": "/kairan/i/*", "comment": "kairan の招待リンク" }
+        ]
+      }
+    ]
+  }
+}
