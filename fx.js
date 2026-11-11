@@ -185,7 +185,12 @@ function timeline(){const grid=$('.update-grid');if(!grid)return;const cards=$$(
  const holder=document.createElement('div');const filter=document.createElement('div');filter.className='fx-tl-filter';filter.setAttribute('role','group');filter.setAttribute('aria-label','アプリで絞り込む');
  const legend=document.createElement('div');legend.className='fx-tl-legend';legend.innerHTML='<span><i class="launch"></i>公開</span><span><i></i>アップデート</span>';
  box.append(head,holder,legend,filter,tip);grid.before(box);
- let picked=null;const lanes=new Map();
+ let picked=null,folded=true;const lanes=new Map(),KEEP=4;
+ const more=document.createElement('button');more.type='button';more.className='fx-tl-more';more.setAttribute('aria-controls','update-list');grid.id=grid.id||'update-list';grid.after(more);
+ // which cards show: the picked app's (or all), and while folded only the newest KEEP of those
+ function layout(){let n=0,rest=0;for(const it of items){const match=!picked||it.app===picked,show=match&&(!folded||n<KEEP);if(match){n++;if(!show)rest++}it.card.hidden=!show;if(show)it.card.classList.add('is-in','rv-done')}
+  more.hidden=n<=KEEP;more.setAttribute('aria-expanded',String(!folded));more.replaceChildren(folded?`残り${rest}件を表示`:'折りたたむ',Object.assign(document.createElement('span'),{textContent:folded?'↓':'↑'}))}
+ more.addEventListener('click',()=>{folded=!folded;layout();if(folded)box.scrollIntoView({behavior:motion()?'smooth':'auto',block:'start'})});
  function draw(){const width=Math.max(280,Math.round(holder.clientWidth)),narrow=width<560,gutter=narrow?92:128,padR=16,row=narrow?26:30,top=26,height=top+apps.length*row+6;
   const x=d=>gutter+(width-gutter-padR)*((+d-first)/Math.max(DAY,last-first));
   const svg=el('svg',{class:'fx-tl-svg',viewBox:`0 0 ${width} ${height}`,width,height,role:'group','aria-label':'アプリ別の更新の年表'});lanes.clear();
@@ -200,17 +205,17 @@ function timeline(){const grid=$('.update-grid');if(!grid)return;const cards=$$(
     const on=()=>{tip.replaceChildren();const b=document.createElement('b'),s=document.createElement('small'),h=document.createElement('span');b.textContent=it.app+' '+it.version;s.textContent=it.label+(it.launch?' / 公開':'');h.textContent=it.title;tip.append(b,s,h);
      const hr=holder.getBoundingClientRect(),br=box.getBoundingClientRect();tip.style.left=Math.max(125,Math.min(br.width-125,hr.left-br.left+px))+'px';tip.style.top=(hr.top-br.top+y)+'px';tip.classList.add('is-on')};
     const off=()=>tip.classList.remove('is-on');a.addEventListener('pointerenter',on);a.addEventListener('focus',on);a.addEventListener('pointerleave',off);a.addEventListener('blur',off);
-    a.addEventListener('click',e=>{e.preventDefault();off();if(picked&&picked!==it.app)pick(null);it.card.classList.add('is-in','rv-done');it.card.style.setProperty('--fx-flash',color);it.card.scrollIntoView({behavior:motion()?'smooth':'auto',block:'center'});
+    a.addEventListener('click',e=>{e.preventDefault();off();if(picked&&picked!==it.app)pick(null);if(it.card.hidden){folded=false;layout()}it.card.classList.add('is-in','rv-done');it.card.style.setProperty('--fx-flash',color);it.card.scrollIntoView({behavior:motion()?'smooth':'auto',block:'center'});
      it.card.classList.remove('fx-flash');void it.card.offsetWidth;it.card.classList.add('fx-flash')});
     g.append(a)});svg.append(g)});
   holder.replaceChildren(svg)}
  function pick(app){picked=picked===app?null:app;box.classList.toggle('has-filter',!!picked);for(const [name,g] of lanes)g.classList.toggle('is-picked',name===picked);
   for(const b of filter.children)b.setAttribute('aria-pressed',String((b.dataset.app||null)===picked));
-  for(const it of items){it.card.hidden=!!picked&&it.app!==picked;if(!it.card.hidden)it.card.classList.add('is-in','rv-done')}}
+  layout()}
  const chip=(app,count)=>{const b=document.createElement('button');b.type='button';b.setAttribute('aria-pressed',String(!app));if(app){b.dataset.app=app;b.style.setProperty('--c',look(app)[0]);b.append(document.createElement('i'))}
   b.append(app||'すべて');const n=document.createElement('b');n.textContent=count;b.append(n);b.addEventListener('click',()=>pick(app&&picked!==app?app:null));return b};
  filter.append(chip(null,items.length),...apps.map(app=>chip(app,items.filter(it=>it.app===app).length)));
- draw();let lastWidth=holder.clientWidth;new ResizeObserver(()=>{if(Math.abs(holder.clientWidth-lastWidth)>1){lastWidth=holder.clientWidth;draw()}}).observe(holder);
+ layout();draw();let lastWidth=holder.clientWidth;new ResizeObserver(()=>{if(Math.abs(holder.clientWidth-lastWidth)>1){lastWidth=holder.clientWidth;draw()}}).observe(holder);
  if('IntersectionObserver' in window&&motion()){const io=new IntersectionObserver(([e])=>{if(e.isIntersecting||e.boundingClientRect.bottom<=0){box.classList.add('is-in');io.disconnect()}},{rootMargin:'0px 0px -18% 0px'});io.observe(box)}else box.classList.add('is-in');
 }
 try{timeline()}catch(error){console.warn('Timeline unavailable.',error)}

@@ -157,6 +157,11 @@ html.hero-sda .collection-card:nth-child(4){--fxo:0;--fyo:-2.4;--fo:1.5}
 .fx-tl-legend i{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:6px;vertical-align:-1px;background:#9fdcb7}
 .fx-tl-legend i.launch{background:transparent;border:2px solid #9fdcb7;box-sizing:border-box}
 .update-card[hidden]{display:none}
+.fx-tl-more{display:flex;align-items:center;justify-content:center;gap:12px;width:100%;min-height:52px;margin-top:22px;border:1px solid #75937e55;background:linear-gradient(180deg,#0d1c14aa,#080f0d);color:#c9f3d9;font:inherit;font-size:13px;letter-spacing:.04em;cursor:pointer;transition:background .2s,border-color .2s}
+.fx-tl-more:hover{background:#12241a;border-color:#70eda888}
+.fx-tl-more span{color:var(--green);font-size:16px}
+.fx-tl-more[hidden]{display:none}
+.fx-timeline{scroll-margin-top:110px}
 .update-card.fx-flash{animation:fx-flash 1.6s ease-out}
 @keyframes fx-flash{0%{box-shadow:0 0 0 1px var(--fx-flash,#70eda8),0 0 46px color-mix(in srgb,var(--fx-flash,#70eda8) 45%,transparent)}100%{box-shadow:0 0 0 1px transparent,0 0 0 transparent}}
 .update-card{scroll-margin-top:110px}
