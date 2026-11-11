@@ -1,0 +1,162 @@
+/*
+ * i want — visual layer (fx.css / fx.js), added on top of the existing page without changing its layout.
+ *   A. hero: the camera pushes into the wheel's opening and the app cards fly out of it
+ *   B. app artwork: a slab with depth that tilts toward the pointer, with a moving highlight
+ *   C. subject line-drawings behind the artwork (canvas, fx.js)
+ *   D. page transitions (card -> works in this page, top -> support pages across documents)
+ *   E. the update history as a timeline of light
+ * Everything here is off when motion is OFF (body.motion-off) or reduced motion is requested, and the
+ * hero part applies only where app.js enabled CSS scroll-driven animations (html.hero-sda); elsewhere
+ * the previous hero effect stays as it was.
+ */
+:root{--fx-accent:#70eda8}
+
+/* ------------------------------------------------------------------ A. hero ---------------------- */
+/* The opening of the wheel sits at about (--hx,--hy) of .core-object; scaling about that point keeps
+   it still, and the translate carries it to the middle of the stage. */
+.core-flare{position:absolute;left:50%;top:50%;width:min(92vmin,820px);aspect-ratio:1;margin:calc(min(92vmin,820px) / -2) 0 0 calc(min(92vmin,820px) / -2);z-index:-1;pointer-events:none;opacity:0;border-radius:50%;
+  background:radial-gradient(circle,#eafff3 0,#a8ffd0 7%,#70eda8aa 17%,#2f8f5f55 34%,#1c5a3c22 52%,transparent 70%);mix-blend-mode:screen}
+.motion-off .core-flare{display:none}
+html{--hx:51%;--hy:55%;--htx:-18.5%;--hty:-5%}
+@media(max-width:700px){html{--hx:50%;--hy:50%;--htx:0%;--hty:-34%}}
+
+@media (prefers-reduced-motion:no-preference) and (height > 650px){
+html.hero-sda .hero-mark-cards{top:calc(var(--hero-range) * .74 - var(--hero-header))}
+html.hero-sda body:not(.motion-off) .core-object{animation-name:fx-core;transform-origin:var(--hx) var(--hy)}
+html.hero-sda body:not(.motion-off) .collection-preview{animation-name:fx-stage}
+html.hero-sda body:not(.motion-off) :is(.core-flare,.collection-preview>h2,.collection-preview>p,.collection-card){
+  animation-timeline:scroll(root block);animation-duration:auto;animation-timing-function:linear;animation-fill-mode:both}
+html.hero-sda body:not(.motion-off) .core-flare{animation-name:fx-flare;animation-range:0px var(--hero-range)}
+html.hero-sda body:not(.motion-off) .collection-preview>:is(h2,p){animation-name:fx-fade;animation-range:calc(var(--hero-range) * .6) calc(var(--hero-range) * .8)}
+html.hero-sda body:not(.motion-off) .collection-card{animation-name:fx-card;transform-origin:50% 50%;
+  animation-range:calc(var(--hero-range) * (.38 + var(--fo,0) * .035)) calc(var(--hero-range) * (.68 + var(--fo,0) * .035));
+  animation-timing-function:cubic-bezier(.2,.75,.25,1)}
+/* where each card starts, measured from its own place: --fxo columns to the side, --fyo rows down */
+html.hero-sda .collection-card:nth-child(1){--fxo:1.5;--fo:1}
+html.hero-sda .collection-card:nth-child(2){--fxo:.5;--fo:0}
+html.hero-sda .collection-card:nth-child(3){--fxo:-.5;--fo:.5}
+html.hero-sda .collection-card:nth-child(4){--fxo:-1.5;--fo:1.5}
+}
+@media (prefers-reduced-motion:no-preference) and (height > 650px) and (max-width:700px){
+html.hero-sda body:not(.motion-off) .core-object{animation-name:fx-core-phone}
+html.hero-sda .collection-card:nth-child(1){--fxo:1;--fo:.5}
+html.hero-sda .collection-card:nth-child(2){--fxo:0;--fo:0}
+html.hero-sda .collection-card:nth-child(3){--fxo:-1;--fo:1}
+html.hero-sda .collection-card:nth-child(4){--fxo:0;--fyo:-2.4;--fo:1.5}
+}
+@keyframes fx-core{
+  0%{transform:translate(0%,0%) scale(1);opacity:1}
+  30%{transform:translate(calc(var(--htx) * .55),calc(var(--hty) * .55)) scale(1.55);opacity:1}
+  52%{transform:translate(var(--htx),var(--hty)) scale(3.1);opacity:.55}
+  100%{transform:translate(var(--htx),var(--hty)) scale(3.7);opacity:.1}}
+@keyframes fx-core-phone{
+  0%{transform:translate(0%,0%) scale(1);opacity:.88}
+  30%{transform:translate(calc(var(--htx) * .55),calc(var(--hty) * .55)) scale(1.5);opacity:.9}
+  52%{transform:translate(var(--htx),var(--hty)) scale(2.7);opacity:.45}
+  100%{transform:translate(var(--htx),var(--hty)) scale(3.1);opacity:.1}}
+@keyframes fx-flare{
+  0%,22%{opacity:0;transform:scale(.25)}
+  46%{opacity:.95;transform:scale(1)}
+  62%{opacity:.5;transform:scale(1.7)}
+  82%,100%{opacity:.1;transform:scale(2.3)}}
+@keyframes fx-stage{0%,36%{transform:none;opacity:0}40%,100%{transform:none;opacity:1}}
+@keyframes fx-fade{from{opacity:0}to{opacity:1}}
+@keyframes fx-card{
+  0%{opacity:0;transform:translate(calc(var(--fxo,0) * (100% + 20px)),calc(var(--fyo,0) * 50% + 4%)) scale(.06) rotateY(calc(var(--fxo,0) * -34deg)) rotateX(26deg);filter:brightness(2.6) saturate(1.5)}
+  22%{opacity:1}
+  100%{opacity:1;transform:none;filter:none}}
+
+/* ------------------------------------------------------------------ B. artwork slab -------------- */
+.project-art{perspective:1300px;--fx-rx:0deg;--fx-ry:0deg;--fx-gx:50%;--fx-gy:28%}
+.screen-display{perspective:none;transform-style:preserve-3d;transform:rotateX(var(--fx-rx)) rotateY(var(--fx-ry));will-change:transform}
+.fx-tilt .screen-display{transition:transform .5s cubic-bezier(.2,.7,.2,1)}
+.fx-tilt.is-tracking .screen-display{transition:transform .12s linear}
+/* depth: a stack of offset edges under the image, lit from the accent colour */
+.screen-display>button,.screen-display>video{
+  box-shadow:0 0 0 1px #ffffff14 inset,
+   1px 1px 0 #2b4336,2px 2px 0 #263c30,3px 3px 0 #21352a,4px 4px 0 #1c2e24,5px 5px 0 #17271e,6px 6px 0 #122018,
+   0 34px 80px #000c,0 0 90px color-mix(in srgb,var(--fx-accent) 20%,transparent)}
+/* raw screenshots (no device drawn in the image) get a device body around them */
+.screen-display.is-raw>button{padding:9px;border-radius:38px;border:1px solid #9fb8a94d;
+  background:linear-gradient(145deg,#3a4640,#111815 38%,#0b100e 62%,#2a342f)}
+.screen-display.is-raw>button>img{border-radius:29px}
+.screen-display.is-raw>button>.zoom-hint{left:9px;right:9px;bottom:9px;border-radius:0 0 29px 29px}
+/* moving highlight on the glass */
+.fx-glare{position:absolute;inset:0;z-index:2;pointer-events:none;border-radius:16px;opacity:.9;mix-blend-mode:screen;transform:translateZ(1px);
+  background:radial-gradient(60% 45% at var(--fx-gx) var(--fx-gy),#ffffff2e,#ffffff0f 38%,transparent 68%),
+   linear-gradient(115deg,transparent 30%,#ffffff12 46%,transparent 58%)}
+.screen-display.is-raw .fx-glare{border-radius:38px}
+/* shadow on the floor, sliding against the tilt */
+.fx-floor{position:absolute;left:50%;top:100%;width:86%;height:44px;margin:14px 0 0 -43%;z-index:-1;pointer-events:none;border-radius:50%;
+  background:radial-gradient(closest-side,color-mix(in srgb,var(--fx-accent) 34%,#000) 0,#0000 100%);opacity:.55;filter:blur(10px);
+  transform:translateX(calc(var(--fx-ry) / 1deg * -2.2px)) translateZ(-60px)}
+.motion-off .fx-glare{opacity:.45}
+@media(max-width:700px){.screen-display.is-raw>button{padding:6px;border-radius:24px}.screen-display.is-raw>button>img{border-radius:18px}.fx-glare{border-radius:10px}.screen-display.is-raw .fx-glare{border-radius:24px}.fx-floor{height:26px;margin-top:8px}}
+/* touch devices have no pointer to follow: a slow sway instead */
+@media (hover:none) and (prefers-reduced-motion:no-preference){
+  body:not(.motion-off) .project-art:not(.is-playing) .screen-display{animation:fx-sway 9s ease-in-out infinite}
+  @keyframes fx-sway{0%,100%{transform:rotateX(2deg) rotateY(-7deg)}50%{transform:rotateX(-1deg) rotateY(7deg)}}
+}
+
+/* ------------------------------------------------------------------ C. subject drawings ---------- */
+.project-art canvas.fx-motif{position:absolute;inset:0;width:100%;height:100%;z-index:1;opacity:.62;pointer-events:none}
+.project-art.is-dev canvas.fx-motif{opacity:.5}
+.project-art.is-dev .dev-visual{text-shadow:0 2px 24px #080f0d}
+
+/* ------------------------------------------------------------------ D. transitions --------------- */
+@view-transition{navigation:auto}
+@media (prefers-reduced-motion:reduce){@view-transition{navigation:none}}
+#project-name{view-transition-name:app-title}
+::view-transition-group(fx-device){animation-duration:.62s;animation-timing-function:cubic-bezier(.3,.7,.15,1)}
+::view-transition-old(fx-device),::view-transition-new(fx-device){height:100%;width:100%;object-fit:cover;object-position:top}
+::view-transition-group(app-title){animation-duration:.5s;animation-timing-function:cubic-bezier(.3,.7,.15,1)}
+::view-transition-old(root),::view-transition-new(root){animation-duration:.38s}
+
+/* ------------------------------------------------------------------ E. timeline ------------------ */
+.fx-timeline{position:relative;margin:0 0 30px;border:1px solid #75937e40;background:linear-gradient(180deg,#0d1c14aa,#080f0d);padding:22px 22px 16px}
+.fx-timeline::before{content:'+';color:var(--green);position:absolute;left:-5px;top:-10px;font:16px monospace}
+.fx-tl-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px;font-size:11px;letter-spacing:.04em;color:#86bd9a;margin-bottom:10px}
+.fx-tl-head span:last-child{color:#99ad9f}
+.fx-tl-svg{display:block;width:100%;height:auto;overflow:visible}
+.fx-tl-svg text{font-family:inherit;fill:#a9beb0}
+.fx-tl-svg .tl-week{stroke:#7a9b8726;stroke-width:1}
+.fx-tl-svg .tl-date{font-size:10px;fill:#7f968a;text-anchor:middle}
+.fx-tl-svg .tl-name{font-size:11.5px;font-weight:700;fill:#c5dccd}
+.fx-tl-svg .tl-base{stroke:#7a9b8730;stroke-width:1}
+.fx-tl-svg .tl-line{fill:none;stroke-width:2;stroke-linecap:round;stroke-dasharray:1;stroke-dashoffset:1;filter:drop-shadow(0 0 5px currentColor)}
+.fx-tl-svg .tl-lane{transition:opacity .3s}
+.fx-tl-svg .tl-dot{cursor:pointer;outline:none}
+.fx-tl-svg .tl-dot .halo{opacity:0;transition:opacity .2s,r .2s}
+.fx-tl-svg .tl-dot .pt{stroke:#080f0d;stroke-width:1.5;transition:r .2s}
+.fx-tl-svg .tl-dot.is-launch .pt{fill:#080f0d;stroke:currentColor;stroke-width:2}
+.fx-tl-svg .tl-dot :is(.pt,.ring){opacity:0;transform-box:fill-box;transform-origin:center;transform:scale(.2)}
+.fx-tl-svg .tl-dot .ring{fill:none;stroke:currentColor;stroke-width:1;opacity:0}
+.fx-tl-svg .tl-dot:is(:hover,:focus-visible,.is-on) .halo{opacity:.28}
+.fx-tl-svg .tl-dot:is(:hover,:focus-visible,.is-on) .pt{r:6.5px}
+.fx-tl-svg .tl-dot:focus-visible .halo{opacity:.5}
+.fx-tl-svg .tl-hit{fill:transparent}
+.fx-timeline.is-in .tl-line{stroke-dashoffset:0;transition:stroke-dashoffset 1.5s cubic-bezier(.3,.6,.2,1) var(--d,0ms)}
+.fx-timeline.is-in .tl-dot .pt{opacity:1;transform:none;transition:opacity .35s ease var(--d,0ms),transform .55s cubic-bezier(.2,1.6,.4,1) var(--d,0ms),r .2s}
+.fx-timeline.is-in .tl-dot.is-launch .ring{animation:fx-ping 2.6s ease-out var(--d,0ms) 2 both}
+@keyframes fx-ping{0%{opacity:.8;transform:scale(.4)}100%{opacity:0;transform:scale(3.2)}}
+.fx-timeline.has-filter .tl-lane:not(.is-picked){opacity:.22}
+.motion-off .fx-timeline .tl-line,.motion-off .fx-timeline .tl-dot .pt{transition:none!important}
+.motion-off .fx-timeline .tl-dot .ring{animation:none!important}
+.fx-tl-tip{position:absolute;z-index:4;pointer-events:none;min-width:150px;max-width:240px;padding:9px 12px;border:1px solid #70eda855;background:#0b1811f2;font-size:11px;line-height:1.6;color:#c9f3d9;box-shadow:0 12px 30px #0009;opacity:0;transform:translate(-50%,calc(-100% - 14px));transition:opacity .15s}
+.fx-tl-tip.is-on{opacity:1}
+.fx-tl-tip b{display:block;font-size:12.5px;color:#fff;font-weight:700}
+.fx-tl-tip small{display:block;font-size:10px;color:#8fab9a}
+.fx-tl-filter{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px;padding-top:14px;border-top:1px solid var(--line)}
+.fx-tl-filter button{display:inline-flex;align-items:center;gap:7px;min-height:34px;padding:5px 12px;border:1px solid #75937e55;background:transparent;color:#c5dccd;font:inherit;font-size:11.5px;letter-spacing:.02em;cursor:pointer;transition:background .2s,border-color .2s,color .2s}
+.fx-tl-filter button i{width:8px;height:8px;border-radius:50%;background:var(--c,var(--green));box-shadow:0 0 8px var(--c,var(--green))}
+.fx-tl-filter button b{font-weight:400;color:#8fab9a;font-size:10px}
+.fx-tl-filter button:hover{background:#12241a}
+.fx-tl-filter button[aria-pressed=true]{border-color:var(--c,var(--green));background:#13281c;color:#fff}
+.fx-tl-legend{display:flex;gap:16px;font-size:10px;color:#8fab9a;margin-top:8px}
+.fx-tl-legend i{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:6px;vertical-align:-1px;background:#9fdcb7}
+.fx-tl-legend i.launch{background:transparent;border:2px solid #9fdcb7;box-sizing:border-box}
+.update-card[hidden]{display:none}
+.update-card.fx-flash{animation:fx-flash 1.6s ease-out}
+@keyframes fx-flash{0%{box-shadow:0 0 0 1px var(--fx-flash,#70eda8),0 0 46px color-mix(in srgb,var(--fx-flash,#70eda8) 45%,transparent)}100%{box-shadow:0 0 0 1px transparent,0 0 0 transparent}}
+.update-card{scroll-margin-top:110px}
+@media(max-width:700px){.fx-timeline{padding:16px 12px 12px;margin-bottom:22px}.fx-tl-svg .tl-name{font-size:10px}.fx-tl-svg .tl-date{font-size:9px}.fx-tl-filter{gap:6px}.fx-tl-filter button{padding:4px 9px;font-size:11px}}

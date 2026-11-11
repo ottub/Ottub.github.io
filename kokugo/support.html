@@ -13,6 +13,10 @@
   ul { padding-left: 1.3em; }
   a { color: #C8402F; }
   .faq-q { font-weight: 600; margin-top: 1.2em; }
+  /* トップページ（ottub.github.io）から同じタブで来たとき、題名をつないで切り替える */
+  @view-transition { navigation:auto; }
+  @media (prefers-reduced-motion: reduce) { @view-transition { navigation:none; } }
+  h1 { view-transition-name:app-title; }
 </style>
 </head>
 <body>

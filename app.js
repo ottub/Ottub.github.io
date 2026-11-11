@@ -59,6 +59,7 @@ function select(index,focus=false,animate=true){const previous=selected;selected
  if(p.screen){$('#product-screen').src=p.screen;$('#product-screen').alt=p.screenAlt;$('#screen-open').setAttribute('aria-label',p.name+'の画像を拡大')}
  $('#store-link').hidden=!p.url;$('#support-link').hidden=!p.support;$('#development-state').hidden=!!p.url;
  if(p.url)$('#store-link').href=p.url;else $('#store-link').removeAttribute('href');if(p.support)$('#support-link').href=p.support;else $('#support-link').removeAttribute('href');
+ document.dispatchEvent(new CustomEvent('iwant:select',{detail:{index}}));
  if(animate&&previous!==index&&motion()){const direction=index>previous?1:-1;const image=p.screen?$('.screen-display'):$('.dev-visual');image.animate([{opacity:0,transform:`translateX(${direction*45}px) scale(.96)`},{opacity:1,transform:'translateX(0) scale(1)'}],{duration:420,easing:'cubic-bezier(.2,.7,.2,1)'});$('.project-info').animate([{opacity:0,transform:`translateX(${direction*18}px)`},{opacity:1,transform:'translateX(0)'}],{duration:330,easing:'ease-out'})}
 }
 tabs.forEach((b,i)=>{b.addEventListener('click',()=>select(i));b.addEventListener('keydown',e=>{let n;if(e.key==='ArrowRight')n=(selected+1)%tabs.length;else if(e.key==='ArrowLeft')n=(selected+tabs.length-1)%tabs.length;else if(e.key==='Home')n=0;else if(e.key==='End')n=tabs.length-1;else return;e.preventDefault();select(n,true)})});
