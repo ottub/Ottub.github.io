@@ -28,7 +28,7 @@ html.hero-sda body:not(.motion-off) :is(.core-flare,.collection-preview>h2,.coll
   animation-timeline:scroll(root block);animation-duration:auto;animation-timing-function:linear;animation-fill-mode:both}
 html.hero-sda body:not(.motion-off) .core-flare{animation-name:fx-flare;animation-range:0px var(--hero-range)}
 html.hero-sda body:not(.motion-off) .collection-preview>:is(h2,p){animation-name:fx-fade;animation-range:calc(var(--hero-range) * .6) calc(var(--hero-range) * .8)}
-html.hero-sda body:not(.motion-off) .collection-card{animation-name:fx-card;transform-origin:50% 50%;
+html.hero-sda body:not(.motion-off) .collection-preview .collection-card{animation-name:fx-card;transform-origin:50% 50%;
   animation-range:calc(var(--hero-range) * (.38 + var(--fo,0) * .035)) calc(var(--hero-range) * (.68 + var(--fo,0) * .035));
   animation-timing-function:cubic-bezier(.2,.75,.25,1)}
 /* where each card starts, measured from its own place: --fxo columns to the side, --fyo rows down */
@@ -89,9 +89,9 @@ html.hero-sda .collection-card:nth-child(4){--fxo:0;--fyo:-2.4;--fo:1.5}
 /* shadow on the floor, sliding against the tilt */
 .fx-floor{position:absolute;left:50%;top:100%;width:86%;height:44px;margin:14px 0 0 -43%;z-index:-1;pointer-events:none;border-radius:50%;
   background:radial-gradient(closest-side,color-mix(in srgb,var(--fx-accent) 34%,#000) 0,#0000 100%);opacity:.55;filter:blur(10px);
-  transform:translateX(calc(var(--fx-ry) / 1deg * -2.2px)) translateZ(-60px)}
+  transform:translateX(var(--fx-fx,0px)) translateZ(-60px)}
 .motion-off .fx-glare{opacity:.45}
-@media(max-width:700px){.screen-display.is-raw>button{padding:6px;border-radius:24px}.screen-display.is-raw>button>img{border-radius:18px}.fx-glare{border-radius:10px}.screen-display.is-raw .fx-glare{border-radius:24px}.fx-floor{height:26px;margin-top:8px}}
+@media(max-width:700px){.screen-display.is-raw>button{padding:6px;border-radius:24px}.screen-display.is-raw>button>img{border-radius:18px}.fx-glare{border-radius:10px}.screen-display.is-raw .fx-glare{border-radius:24px}.fx-floor{height:26px;margin-top:8px}.screen-display.is-raw>button>.zoom-hint{left:6px;right:6px;bottom:6px;border-radius:0 0 18px 18px}}
 /* touch devices have no pointer to follow: a slow sway instead */
 @media (hover:none) and (prefers-reduced-motion:no-preference){
   body:not(.motion-off) .project-art:not(.is-playing) .screen-display{animation:fx-sway 9s ease-in-out infinite}
@@ -101,6 +101,7 @@ html.hero-sda .collection-card:nth-child(4){--fxo:0;--fyo:-2.4;--fo:1.5}
 /* ------------------------------------------------------------------ C. subject drawings ---------- */
 .project-art canvas.fx-motif{position:absolute;inset:0;width:100%;height:100%;z-index:1;opacity:.62;pointer-events:none}
 .project-art.is-dev canvas.fx-motif{opacity:.5}
+.project-art .art-note{z-index:3}
 .project-art.is-dev .dev-visual{text-shadow:0 2px 24px #080f0d}
 
 /* ------------------------------------------------------------------ D. transitions --------------- */
@@ -137,7 +138,7 @@ html.hero-sda .collection-card:nth-child(4){--fxo:0;--fyo:-2.4;--fo:1.5}
 .fx-tl-svg .tl-hit{fill:transparent}
 .fx-timeline.is-in .tl-line{stroke-dashoffset:0;transition:stroke-dashoffset 1.5s cubic-bezier(.3,.6,.2,1) var(--d,0ms)}
 .fx-timeline.is-in .tl-dot .pt{opacity:1;transform:none;transition:opacity .35s ease var(--d,0ms),transform .55s cubic-bezier(.2,1.6,.4,1) var(--d,0ms),r .2s}
-.fx-timeline.is-in .tl-dot.is-launch .ring{animation:fx-ping 2.6s ease-out var(--d,0ms) 2 both}
+.fx-timeline.is-in .tl-dot.is-launch .ring{animation:fx-ping 2.6s ease-out var(--d,0ms) 2 forwards}
 @keyframes fx-ping{0%{opacity:.8;transform:scale(.4)}100%{opacity:0;transform:scale(3.2)}}
 .fx-timeline.has-filter .tl-lane:not(.is-picked){opacity:.22}
 .motion-off .fx-timeline .tl-line,.motion-off .fx-timeline .tl-dot .pt{transition:none!important}

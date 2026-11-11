@@ -40,7 +40,7 @@ const floor=document.createElement('i');floor.className='fx-floor';floor.setAttr
 display.append(glare,floor);
 const video=$('#product-video');
 let tiltFrame=0,tiltTo=null,idle=0;
-function setTilt(rx,ry,gx,gy){art.style.setProperty('--fx-rx',rx.toFixed(2)+'deg');art.style.setProperty('--fx-ry',ry.toFixed(2)+'deg');art.style.setProperty('--fx-gx',gx.toFixed(1)+'%');art.style.setProperty('--fx-gy',gy.toFixed(1)+'%')}
+function setTilt(rx,ry,gx,gy){art.style.setProperty('--fx-rx',rx.toFixed(2)+'deg');art.style.setProperty('--fx-ry',ry.toFixed(2)+'deg');art.style.setProperty('--fx-fx',(ry*-2.2).toFixed(1)+'px');art.style.setProperty('--fx-gx',gx.toFixed(1)+'%');art.style.setProperty('--fx-gy',gy.toFixed(1)+'%')}
 function rest(){art.classList.remove('is-tracking');setTilt(1.5,-9,38,26)}
 function flat(){art.classList.remove('is-tracking');setTilt(0,0,50,28)}
 function playing(){return video&&!video.hidden&&!video.paused}
@@ -158,12 +158,12 @@ document.addEventListener('iwant:select',e=>show(e.detail.index));
 // hero card -> works: the card's screenshot becomes the artwork of the works panel
 const tabs=$$('[data-select]'),header=$('.header');
 function jump(index){for(const el of $$('.works-heading,.project-console,.project-art,.project-info'))el.classList.add('is-in','rv-done');
- tabs[index]&&tabs[index].click();const y=$('.project-console').getBoundingClientRect().top+scrollY-(header?header.offsetHeight:0)-14;window.scrollTo({top:y,behavior:'instant'})}
+ tabs[index]&&tabs[index].click();const y=$('.project-console').getBoundingClientRect().top+scrollY-(header?header.offsetHeight:0)-14;window.scrollTo({top:y,behavior:'instant'});tabs[index]&&tabs[index].focus({preventScroll:true})}
 for(const card of $$('.collection-card[data-project]')){card.addEventListener('click',e=>{
  if(!document.startViewTransition||!motion()||e.metaKey||e.ctrlKey||e.shiftKey||e.button)return;e.preventDefault();
  const img=card.querySelector('.card-preview>img'),index=Number(card.dataset.project);if(img)img.style.viewTransitionName='fx-device';
  const done=()=>{display.style.viewTransitionName='';if(img)img.style.viewTransitionName=''};
- try{const vt=document.startViewTransition(()=>{if(img)img.style.viewTransitionName='';jump(index);display.style.viewTransitionName='fx-device';history.replaceState(null,'','#works')});vt.finished.then(done,done)}
+ try{const vt=document.startViewTransition(()=>{if(img)img.style.viewTransitionName='';jump(index);display.style.viewTransitionName='fx-device';history.pushState(null,'','#works')});vt.ready.catch(()=>{});vt.updateCallbackDone.catch(()=>{});vt.finished.then(done,done)}
  catch(_){done();jump(index)}})}
 // support pages that live in this repository opt in to cross-document transitions (fx.css on this
 // side, one rule in their own <style>); those open in the same tab so the title can carry over
@@ -189,7 +189,7 @@ function timeline(){const grid=$('.update-grid');if(!grid)return;const cards=$$(
  function draw(){const width=Math.max(280,Math.round(holder.clientWidth)),narrow=width<560,gutter=narrow?92:128,padR=16,row=narrow?26:30,top=26,height=top+apps.length*row+6;
   const x=d=>gutter+(width-gutter-padR)*((+d-first)/Math.max(DAY,last-first));
   const svg=el('svg',{class:'fx-tl-svg',viewBox:`0 0 ${width} ${height}`,width,height,role:'group','aria-label':'アプリ別の更新の年表'});lanes.clear();
-  for(let d=new Date(first),n=0;+d<=last;d=new Date(+d+7*DAY),n++){const px=x(d);svg.append(el('line',{class:'tl-week',x1:px,x2:px,y1:top-8,y2:height-4}));
+  for(let d=new Date(first),n=0;+d<=last;d=new Date(d.getFullYear(),d.getMonth(),d.getDate()+7),n++){const px=x(d);svg.append(el('line',{class:'tl-week',x1:px,x2:px,y1:top-8,y2:height-4}));
    if(!narrow||n%2===0)svg.append(el('text',{class:'tl-date',x:px,y:12},`${d.getMonth()+1}.${String(d.getDate()).padStart(2,'0')}`))}
   apps.forEach((app,i)=>{const y=top+i*row+row/2,color=look(app)[0],mine=items.filter(it=>it.app===app).sort((a,b)=>a.date-b.date);
    const g=el('g',{class:'tl-lane'+(picked===app?' is-picked':''),style:`color:${color}`});lanes.set(app,g);

@@ -47,7 +47,7 @@ const tabs=[...document.querySelectorAll('[data-select]')],tabNav=$('#project-na
 function reveal(b){if(!tabNav||tabNav.scrollWidth<=tabNav.clientWidth+1)return;const l=b.offsetLeft,r=l+b.offsetWidth,pad=24;let x=null;if(l<tabNav.scrollLeft+pad)x=l-pad;else if(r>tabNav.scrollLeft+tabNav.clientWidth-pad)x=r-tabNav.clientWidth+pad;if(x!==null)tabNav.scrollTo({left:Math.max(0,x),behavior:motion()?'smooth':'auto'})}
 const lines=(el,text)=>el.replaceChildren(...text.split('\n').flatMap((s,i)=>i?[document.createElement('br'),document.createTextNode(s)]:[document.createTextNode(s)]));
 function select(index,focus=false,animate=true){const previous=selected;selected=index;const p=projects[index];
- for(const el of [$('.screen-display'),$('.dev-visual'),$('.project-info')])el.getAnimations().forEach(a=>a.cancel());
+ for(const el of [$('.screen-display'),$('.dev-visual'),$('.project-info')])el.getAnimations().forEach(a=>{if(!(window.CSSAnimation&&a instanceof CSSAnimation))a.cancel()});
  tabs.forEach((b,i)=>{b.setAttribute('aria-selected',String(i===index));b.tabIndex=i===index?0:-1;if(focus&&i===index)b.focus({preventScroll:true})});if(animate)reveal(tabs[index]);
  $('#project-panel').setAttribute('aria-labelledby','tab-'+index);$('#project-name').textContent=p.name;$('#project-kind').textContent=p.kind+' / '+p.field;
  lines($('#product-headline'),p.headline);lines($('#project-copy'),p.copy);$('#project-note').textContent=p.note;$('#release-badge').textContent=p.state;$('#release-badge').classList.toggle('is-dev',!p.url);$('#price-note').textContent=p.price;
@@ -60,7 +60,7 @@ function select(index,focus=false,animate=true){const previous=selected;selected
  $('#store-link').hidden=!p.url;$('#support-link').hidden=!p.support;$('#development-state').hidden=!!p.url;
  if(p.url)$('#store-link').href=p.url;else $('#store-link').removeAttribute('href');if(p.support)$('#support-link').href=p.support;else $('#support-link').removeAttribute('href');
  document.dispatchEvent(new CustomEvent('iwant:select',{detail:{index}}));
- if(animate&&previous!==index&&motion()){const direction=index>previous?1:-1;const image=p.screen?$('.screen-display'):$('.dev-visual');image.animate([{opacity:0,transform:`translateX(${direction*45}px) scale(.96)`},{opacity:1,transform:'translateX(0) scale(1)'}],{duration:420,easing:'cubic-bezier(.2,.7,.2,1)'});$('.project-info').animate([{opacity:0,transform:`translateX(${direction*18}px)`},{opacity:1,transform:'translateX(0)'}],{duration:330,easing:'ease-out'})}
+ if(animate&&previous!==index&&motion()){const direction=index>previous?1:-1;const image=p.screen?$('.screen-display'):$('.dev-visual');image.animate([{opacity:0,translate:`${direction*45}px 0`,scale:'.96'},{opacity:1,translate:'0 0',scale:'1'}],{duration:420,easing:'cubic-bezier(.2,.7,.2,1)'});$('.project-info').animate([{opacity:0,transform:`translateX(${direction*18}px)`},{opacity:1,transform:'translateX(0)'}],{duration:330,easing:'ease-out'})}
 }
 tabs.forEach((b,i)=>{b.addEventListener('click',()=>select(i));b.addEventListener('keydown',e=>{let n;if(e.key==='ArrowRight')n=(selected+1)%tabs.length;else if(e.key==='ArrowLeft')n=(selected+tabs.length-1)%tabs.length;else if(e.key==='Home')n=0;else if(e.key==='End')n=tabs.length-1;else return;e.preventDefault();select(n,true)})});
 document.querySelectorAll('[data-project]').forEach(a=>a.addEventListener('click',()=>select(Number(a.dataset.project))));
