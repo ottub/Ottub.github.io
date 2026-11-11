@@ -72,6 +72,14 @@
       "copy": "家庭教師のための指導管理アプリ。",
       "icon": "https://ottub.github.io/assets/kateki-icon.png",
       "url": "https://apps.apple.com/jp/app/id6789912177"
+    },
+    {
+      "id": "6832473283",
+      "name": "国語マスター",
+      "field": "高校国語",
+      "copy": "共通テストの国語を、本番と同じ紙面の冊子で解く。",
+      "icon": "https://ottub.github.io/assets/kokugo-icon.png",
+      "url": "https://apps.apple.com/jp/app/id6832473283"
     }
   ]
 }
